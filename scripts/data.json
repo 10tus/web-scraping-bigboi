@@ -1,0 +1,40 @@
+{
+    "stock": [
+        {
+            "meg": {
+                "resist": "1",
+                "support": "2"
+            }
+        },
+        {
+            "aba": {
+                "resist": "12",
+                "support": "13"
+            }
+        },
+        {
+            "con": {
+                "resist": "12",
+                "support": "15"
+            }
+        },
+        {
+            "chp": {
+                "resist": "",
+                "support": ""
+            }
+        },
+        {
+            "chp": {
+                "resist": "",
+                "support": ""
+            }
+        },
+        {
+            "meg": {
+                "resist": "",
+                "support": ""
+            }
+        }
+    ]
+}

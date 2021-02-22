@@ -1,0 +1,269 @@
+
+Screen:
+    ScreenManager:
+        id:sc_manager
+        Screen:
+
+            id:main
+            name:"mainScreen"
+            MDBoxLayout:
+                orientation: 'vertical'
+                MDToolbar:
+                    title: 'Stocktify'
+                    anchor_title: 'center'
+                    left_action_items: [['menu', lambda x: nav_draw.set_state("toggle")]]
+                    
+                    elevation:10
+
+                    MDIconButton:
+                        id:notif
+                        icon: 'bell'
+                        pos_hint: {"center_x": .5, "center_y": .5}
+                        theme_text_color: "Custom"
+                        text_color:[1,1,1,1]
+                        on_release:
+                            app.TriggerNotify()
+                
+
+                MDBoxLayout:
+                    orientation:'vertical'
+                    
+                    
+                    ScrollView:
+                        MDList:
+                            id:md_list
+                            padding:0
+                            
+                                        
+
+                MDBottomAppBar:         
+                    MDToolbar:
+                        icon:'plus'
+                        type:'bottom'
+                        mode:'end'
+                        on_action_button:sc_manager.current="add"
+                
+
+          
+        
+        Screen:
+            name:"about"
+            MDBoxLayout:
+                orientation: 'vertical'
+            
+                MDLabel:
+                    text:'developed by lotus-s devs!'
+                    halign:'center'
+                
+                Widget:
+        
+        Screen:
+            name:"add"
+            MDBoxLayout:
+                orientation: 'vertical'
+                spacing:10
+                MDToolbar:
+                    title: 'Stocktify'
+                    anchor_title: 'center'
+                    
+                    
+                    elevation:10
+
+                    
+                           
+                
+                MDCard:
+                    
+                    orientation:'vertical'
+                    
+                    padding: 20,0,0,20 #left,top,right,bottom
+
+                             
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    
+                    MDLabel:
+                        text:"Stock Information"
+                        theme_text_color: "Custom"
+                        font_size: 25
+                        text_color:[0,0,0,.8]
+                        halign:'left'
+                        
+                        
+                    MDSeparator:
+                        height: "1dp"
+                    
+                    MDTextField:
+                        id:s_code  
+                        hint_text:"Enter Stock Code"
+                        max_text_length: 5
+                        halign:'left'
+                        size_hint_x: .25
+                       
+                    MDBoxLayout:
+                        orientation: 'horizontal' 
+                        spacing:10
+                        size_hint_x: 1
+                        MDTextField:
+                            id:res_price     
+                            hint_text:"Resistant Price"
+                            max_text_length: 10
+                            halign:'left'
+                            
+                            
+
+                        MDTextField:
+                            id:sup_price     
+                            hint_text:"Support Price"
+                            max_text_length: 10
+                            halign:'left'
+                            
+                        
+                        
+                    
+                    MDBoxLayout:
+                        orientation: 'horizontal' 
+                        spacing:20
+                        size_hint_x: 1
+                        
+                        Widget:
+                        MDRectangleFlatButton:
+                            
+                            text: "Cancel"
+                            text_color: 1, 0, 0, .9
+                            on_release:
+                                app.BackToMainScreen()
+
+                        MDRectangleFlatButton:    
+                            text: "Confirm"
+                            text_color: 0, 1, 0, .9
+                            on_release:
+                                app.AcceptInput()
+                                app.BackToMainScreen()
+                        Widget:
+                Widget:
+                       
+                           
+    MDNavigationDrawer:
+        id:nav_draw       
+        MDBoxLayout:
+            padding: '8dp'
+            spacing: '8dp'
+            orientation: 'vertical'
+
+            ScrollView:
+                MDList:
+                    OneLineIconListItem:
+                        text:'My Alerts'
+                        on_release: 
+                            sc_manager.current="mainScreen"
+                            nav_draw.set_state("close")
+                            
+                        IconLeftWidget:
+                            icon:'android'
+                        
+
+                    OneLineIconListItem:
+                        text:'About Us'
+                        on_release: 
+                            sc_manager.current="about"
+                            nav_draw.set_state("close")
+                            
+                        IconLeftWidget:
+                            icon:'android'
+                        
+
+<SwipeStockItem>:
+    size_hint_y: None
+    height:50
+    id:item
+    MDCardSwipeLayerBox:
+        padding:10
+        MDIconButton:
+            id:btn_edit
+            icon: 'pencil-outline'
+            pos_hint: {"center_x": .5, "center_y": .5}
+            theme_text_color: "Custom"
+            
+            text_color:app.theme_cls.primary_color
+            
+
+        MDIconButton:
+            id:btn_del
+            icon: 'delete'
+            
+            pos_hint: {"center_x": .5, "center_y": .5}
+            theme_text_color: "Custom"
+            text_color:[0,0,0,1]
+            on_release:
+                app.on_swipe_complete(root)
+
+    MDCardSwipeFrontBox:
+        
+        OneLineIconListItem:
+            MDBoxLayout:
+                orientation:'horizontal'  
+                padding:15
+                pos_hint: {"center_x": .5, "center_y": .5}
+
+                MDIcon:
+                    halign: "left"
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    valign: "middle"
+                    size_hint_x:.1
+                    icon: "chevron-down" 
+                    theme_text_color: "Custom"
+                    text_color:[1,0,0,.8]          
+                
+                MDLabel:
+                    
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    text:'CHP'
+                    font_size:20
+                    size_hint_x:.1
+                    halign:'left'
+                    valign: "middle"
+                
+                MDLabel:
+                    
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    text:'1.2M'
+                    font_size: 15
+                    halign:'center'
+                    size_hint_x:.2
+                    
+                    valign: "middle"
+                
+                MDLabel:
+                                    
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    text:'-6.00'
+                    theme_text_color:'Custom'
+                    text_color:[1,0,0,.8]
+                    halign:'center'
+                    font_size: 15
+                    
+                    size_hint_x:.2
+                    valign: "center"
+                MDLabel: 
+                    
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    text:'-6.00%'
+                    theme_text_color:'Custom'
+                    text_color:[1,0,0,.8]
+                    font_size: 15
+                    size_hint_x:.2
+                    halign:'center'
+                    valign: "middle"
+                                                
+                
+                MDLabel:
+                    id:curr_price
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    text:"1"
+                    font_size: 20
+                    size_hint_x:.1
+                    halign:'center'
+                    valign: "middle"                        
+                        
+
+                   
